@@ -1,0 +1,59 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}">
+<div layout:fragment="content">
+
+    <div class="card card-form">
+
+        <div class="row no-gutters">
+            <div class="col-lg-12 card-body">
+                <div class="card-header">
+                    <h3>Estimasi Harga</h3>
+                </div>
+                <a href="viewaddEstimasiHarga" class="btn btn-primary">+ Add New</a>
+                <div class="table-responsive border-bottom" data-toggle="lists" data-lists-values='["js-lists-values-employee-name"]'>
+
+                    <table class="table mb-0 thead-border-top-0">
+                        <thead>
+                        <tr>
+
+                            <th>No</th>
+                            <th>Merek</th>
+                            <th>Tipe</th>
+                            <th>Tahun Pembuatan</th>
+                            <th>Estimasi Harga</th>
+
+
+
+
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody class="list" id="staff02">
+                        <tr th:each="EstimasiHarga, counter: ${listEstimasiHarga}">
+                            <th th:text="${counter.count}"></th>
+                            <td th:text="${EstimasiHarga.merkList.nama_merk}"></td>
+                            <td th:text="${EstimasiHarga.tipeList.nama_tipe}"></td>
+                            <td th:text="${EstimasiHarga.tahun_pembuatan}"></td>
+                            <td th:text="${EstimasiHarga.estimasi_harga}"></td>
+
+
+
+                            <td>
+                                <a th:href="@{detailEstimasiHarga/{id_estimasi_harga}(id_estimasi_harga=${EstimasiHarga.id_estimasi_harga})}" class="btn btn-info">Detail</a>
+                                <a th:href="@{/viewupdateEstimasiHarga/{id_estimasi_harga}(id_estimasi_harga=${EstimasiHarga.id_estimasi_harga})}" class="btn btn-outline-primary">Edit</a>
+                                <a th:href="@{deleteEstimasiHarga/{id_estimasi_harga}(id_estimasi_harga=${EstimasiHarga.id_estimasi_harga})}" class="btn btn-danger" onclick="return confirm('Yakin ingin hapus ?')">Delete</a> </td>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</html>

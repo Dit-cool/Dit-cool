@@ -1,0 +1,117 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}">
+<div layout:fragment="content">
+
+    <div class="card card-form">
+        <div class="row no-gutters">
+
+            <div class="col-lg-12 card-body">
+                <div class="card-header">
+                    <h3>Tambah Data Tipe</h3>
+                </div>
+                <form th:action="@{/addTipe}" th:object="${tipeObject}" method="post">
+                    <div class="form-group">
+                        <label>Nama Tipe</label>
+                        <input class="form-control" type="text" name="nama_tipe" id="nama_tipe" th:field="*{nama_tipe}">
+                        <div class="validate-alert hide" style="color:red"> </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_merk">Nama Merk</label>
+                        <select class="form-control" name="id_merk" id="id_merk" >
+                            <option th:each="merk :${listMerk}"
+                                    th:value="${merk.id_merk}"
+                                    th:utext="${merk.nama_merk}"/>
+                        </select>
+                        <div class="validate-alert hide" style="color:red"> </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit" id="btnSave">Simpan</button>
+                    <a class="btn btn-danger" href="/listTipe">Batal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- validasi java script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        function ValidateInput() {
+            const validate = [0, 0];
+
+            if ($(nama_tipe).val() === '') {
+                setErrorFor($(nama_tipe), 'Nama tipe harap di isi');
+            } else {
+                setClearFor($(nama_tipe));
+                validate[0] = 1;
+            }
+
+            if ($(id_merk).val() === '') {
+                setErrorFor($(id_merk), 'Merek harap di isi');
+            } else {
+                setClearFor($(id_merk));
+                validate[1] = 1;
+            }
+
+            if (validate[0] == 1 && validate[1] == 1 ) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function setClearFor(input) {
+            var alert = $(input).parent().closest(".form-group").find('.validate-alert');
+            $(input).removeClass('input-invalid');
+            alert.addClass('hide');
+        }
+
+        function setErrorFor(input, message) {
+            var alert = $(input).parent().closest(".form-group").find('.validate-alert');
+            $(input).addClass('input-invalid');
+            alert.removeClass('hide');
+            alert.html(message);
+        }
+
+        function isChar(textbox) {
+            return /^[a-zA-Z]*$/g.test(textbox);
+        }
+
+        function isDigit(textBox) {
+            return /^[0-9]*$/g.test(textBox);
+        }
+
+        function Clear(element) {
+            if ($(element).hasClass("form-control input-invalid")) {
+                setClearFor(element);
+            }
+        }
+
+
+        $(document).ready(function () {
+            $('select').change(function () {
+                Clear(this);
+            });
+            $('input[type=text],input[type=number]').on('input', function () {
+                Clear(this);
+            });
+            $('textarea').on('input', function () {
+                Clear(this);
+            });
+            $('#potongan').on('input', function () {
+                Clear(this);
+            });
+        });
+        $('#btnSave').click(function (event) {
+            if (ValidateInput() == true) {
+                return true;
+            } else {
+
+                return false;
+            }
+        })
+    </script>
+
+</div>
+</html>

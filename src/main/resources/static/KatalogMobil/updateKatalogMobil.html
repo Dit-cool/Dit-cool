@@ -1,0 +1,31 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}">
+
+<div layout:fragment="content">
+
+    <div class="card card-form">
+        <div class="row no-gutters">
+
+            <div class="col-lg-12 card-body">
+                <div class="card-header">
+                    <h3>Ubah Data Katalog Mobil</h3>
+                </div>
+
+                <form th:action="@{/updateKatalogMobil/{id_katalog}(id_katalog=${KatalogMobilObject.id_katalog})}" th:object="${KatalogMobilObject}" method="post">
+                    <div class="form-group">
+                        <input type="hidden" th:field="*{id_katalog}">
+                    </div>
+                    <div class="form-group">
+                        <label for="harga">Nama Merk</label>
+                        <input type="text" name="harga" id="harga" th:field="*{harga}">
+                    </div>
+                    <button class="btn btn-primary" onclick="return Validate()">Simpan</button>
+                    <a class="btn btn-danger" href="/listKatalogMobil">Batal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

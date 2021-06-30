@@ -1,0 +1,55 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}">
+
+<div layout:fragment="content">
+
+    <div class="card card-form">
+        <div class="row no-gutters">
+
+            <div class="col-lg-12 card-body">
+                <div class="card-header">
+                    <h3>Paket Salon</h3>
+                </div>
+
+                <div class="card-block" th:object="${paketSalonObject}">
+                    <div class="form-group">
+                        <p><strong class="headings-color">ID Paket</strong></p>
+                        <input class="form-control form-control-rounded" type="text" name="id_paket" id="id_paket" th:field="*{id_paket}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <p><strong class="headings-color">Nama Paket</strong></p>
+                        <input class="form-control form-control-rounded" type="text" name="nama_paket" id="nama_paket" th:field="*{nama_paket}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <p><strong class="headings-color">Deskripsi</strong></p>
+                        <input class="form-control form-control-rounded" type="text" name="deskripsi" id="deskripsi" th:field="*{deskripsi}"disabled>
+                    </div>
+                    <div class="form-group">
+                        <p><strong class="headings-color">Status</strong></p>
+                        <input class="form-control form-control-rounded" type="text" name="status" id="status" th:field="*{status}"disabled>
+                    </div>
+                    <div class="form-group">
+                        <p><strong class="headings-color">Created At</strong></p>
+                        <input class="form-control form-control-rounded" type="text" name="creadate" id="creadate" th:field="*{creadate}"disabled>
+                    </div>
+                    <div class="form-group">
+                        <p><strong class="headings-color">Created By</strong></p>
+                        <input class="form-control form-control-rounded" type="text" name="creaby" id="creaby" th:field="*{creaby}"disabled>
+                    </div>
+                    <div class="form-group">
+                        <p><strong class="headings-color">Modified At</strong></p>
+                        <input class="form-control form-control-rounded" type="text" name="modidate" id="modidate" th:field="*{modidate}"disabled>
+                    </div>
+                    <div class="form-group">
+                        <p><strong class="headings-color">Modified By</strong></p>
+                        <input class="form-control form-control-rounded" type="text" name="modiby" id="modiby" th:field="*{modiby}" disabled>
+                    </div>
+                    <a class="btn btn-primary-dark" href="/listPaketSalon">Kembali</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

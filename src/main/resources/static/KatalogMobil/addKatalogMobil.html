@@ -1,0 +1,183 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}">
+<div layout:fragment="content">
+
+    <div class="card card-form">
+        <div class="row no-gutters">
+
+            <div class="col-lg-12 card-body">
+                <div class="card-header">
+                    <h3>Tambah Data Kalog Mobil</h3>
+                </div>
+                <form class="form-group" th:action="@{/addKatalogMobil}" th:object="${KatalogMobilObject}" method="post">
+                    <div class="form-group">
+                        <label for="id_merk">Nama Merk</label>
+                        <select class="form-control" name="id_merk" id="id_merk" >
+                            <option th:each="merk :${listMerk}"
+                                    th:value="${merk.id_merk}"
+                                    th:utext="${merk.nama_merk}"/>
+                        </select>
+                        <div class="validate-alert hide" style="color:red"> </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_tipe">Tipe</label>
+                        <select class="form-control" name="id_tipe" id="id_tipe" >
+                            <option th:each="tipe :${listTipe}"
+                                    th:value="${tipe.id_tipe}"
+                                    th:utext="${tipe.nama_tipe}"/>
+                        </select>
+                        <div class="validate-alert hide" style="color:red"> </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tahun_pembuatan">Tahun Pembuatan</label>
+                        <input class="form-control" type="text" name="tahun_pembuatan" id="tahun_pembuatan" th:field="*{tahun_pembuatan}">
+                        <div class="validate-alert hide" style="color:red"> </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="kapasitas_mesin">Kapasitas Mesin</label>
+                        <input class="form-control" type="text" name="kapasitas_mesin" id="kapasitas_mesin" th:field="*{kapasitas_mesin}">
+                        <div class="validate-alert hide" style="color:red"> </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="transmisi_mesin">Transmisi Mesin</label>
+                        <input class="form-control" type="text" name="transmisi_mesin" id="transmisi_mesin" th:field="*{transmisi_mesin}">
+                        <div class="validate-alert hide" style="color:red"> </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="warna_mobil">Warna Mobil</label>
+                        <input class="form-control" type="text" name="warna_mobil" id="warna_mobil" th:field="*{warna_mobil}">
+                        <div class="validate-alert hide" style="color:red"> </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="harga">Harga</label>
+                        <input class="form-control" type="text" name="harga" id="harga" th:field="*{harga}">
+                        <div class="validate-alert hide" style="color:red"> </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit" id="btnSave">Simpan</button>
+                    <a class="btn btn-danger" href="/listKatalogMobil">Batal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- validasi java script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        function ValidateInput() {
+            const validate = [0, 0, 0, 0, 0, 0, 0];
+
+            if ($(id_merk).val() === '') {
+                setErrorFor($(id_merk), 'Merk harap di isi');
+            } else {
+                setClearFor($(id_merk));
+                validate[0] = 1;
+            }
+
+            if ($(id_tipe).val() === '') {
+                setErrorFor($(id_tipe), 'Tipe harap di isi');
+            } else {
+                setClearFor($(id_tipe));
+                validate[1] = 1;
+            }
+
+            if ($(tahun_pembuatan).val() === '') {
+                setErrorFor($(tahun_pembuatan), 'Tahun Pembuatan harap di isi');
+            } else {
+                setClearFor($(tahun_pembuatan));
+                validate[2] = 1;
+            }
+
+            if ($(kapasitas_mesin).val() === '') {
+                setErrorFor($(kapasitas_mesin), 'Kapasitas Mesin harap di isi');
+            } else {
+                setClearFor($(kapasitas_mesin));
+                validate[3] = 1;
+            }
+
+            if ($(transmisi_mesin).val() === '') {
+                setErrorFor($(transmisi_mesin), 'Transmisi Mesin harap di isi');
+            } else {
+                setClearFor($(transmisi_mesin));
+                validate[4] = 1;
+            }
+
+            if ($(warna_mobil).val() === '') {
+                setErrorFor($(warna_mobil), 'Warna harap di isi');
+            } else {
+                setClearFor($(warna_mobil));
+                validate[5] = 1;
+            }
+
+            if ($(harga).val() === '') {
+                setErrorFor($(harga), 'Harga harap di isi');
+            } else if (!isDigit($(harga).val())) {
+                setErrorFor($(harga), 'Harga hanya berupa angka');
+            } else {
+                setClearFor($(harga));
+                validate[6] = 1;
+            }
+
+
+            if (validate[0] == 1 && validate[1] == 1 && validate[2] == 1 && validate[3] == 1 && validate[4] == 1 && validate[5] == 1 && validate[6] == 1 ) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function setClearFor(input) {
+            var alert = $(input).parent().closest(".form-group").find('.validate-alert');
+            $(input).removeClass('input-invalid');
+            alert.addClass('hide');
+        }
+
+        function setErrorFor(input, message) {
+            var alert = $(input).parent().closest(".form-group").find('.validate-alert');
+            $(input).addClass('input-invalid');
+            alert.removeClass('hide');
+            alert.html(message);
+        }
+
+        function isChar(textbox) {
+            return /^[a-zA-Z]*$/g.test(textbox);
+        }
+
+        function isDigit(textBox) {
+            return /^[0-9]*$/g.test(textBox);
+        }
+
+        function Clear(element) {
+            if ($(element).hasClass("form-control input-invalid")) {
+                setClearFor(element);
+            }
+        }
+
+
+        $(document).ready(function () {
+            $('select').change(function () {
+                Clear(this);
+            });
+            $('input[type=text],input[type=number]').on('input', function () {
+                Clear(this);
+            });
+            $('textarea').on('input', function () {
+                Clear(this);
+            });
+            $('#potongan').on('input', function () {
+                Clear(this);
+            });
+        });
+        $('#btnSave').click(function (event) {
+            if (ValidateInput() == true) {
+                return true;
+            } else {
+
+                return false;
+            }
+        })
+    </script>
+
+</div>
+</html>

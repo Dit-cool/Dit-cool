@@ -1,0 +1,62 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}">
+<div layout:fragment="content">
+    <div class="card card-form">
+
+        <div class="row no-gutters">
+            <div class="col-lg-12 card-body">
+                <div class="card-header">
+                    <h3>Daftar Montir</h3>
+                </div>
+                <a href="/viewaddMontir" class="btn btn-primary">+ Add New</a>
+                <div class="table-responsive border-bottom" data-toggle="lists" data-lists-values='["js-lists-values-employee-name"]'>
+
+                    <table class="table mb-0 thead-border-top-0">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+<!--                            <th>ID</th>-->
+                            <th>Name</th>
+                            <th>Alamat</th>
+                            <th>No Telp</th>
+                            <th>Email</th>
+                            <th>Status</th>
+
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody class="list" id="staff02">
+                        <tr th:each="montir, counter: ${listMontir}">
+                            <th th:text="${counter.count}"></th>
+<!--                            <td th:text="${montir.id_montir}"></td>-->
+                            <td th:text="${montir.nama_montir}"></td>
+                            <td th:text="${montir.alamat}"></td>
+                            <td th:text="${montir.no_telp}"></td>
+                            <td th:text="${montir.email}"></td>
+                            <td>
+                                <div th:switch="${montir.status}">
+                                    <span th:case="1" class="tag tag-pill tag-success">Aktif</span>
+                                    <span th:case="0" class="tag tag-pill tag-danger">Tidak Aktif</span>
+                                </div>
+                            </td>
+
+                            <td>
+                                <a th:href="@{detailMontir/{id_montir}(id_montir=${montir.id_montir})}" class="btn btn-info">Detail</a>
+                                <a th:href="@{/viewupdateMontir/{id_montir}(id_montir=${montir.id_montir})}" class="btn btn-outline-primary">Edit</a>
+                                <a th:href="@{deleteMontir/{id_montir}(id_montir=${montir.id_montir})}" class="btn btn-danger" onclick="return confirm('Yakin ingin hapus ?')">Delete</a> </td>
+                            </td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</html>

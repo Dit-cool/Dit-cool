@@ -1,0 +1,130 @@
+
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}">
+<div layout:fragment="content">
+
+    <div class="card card-form">
+        <div class="row no-gutters">
+
+            <div class="col-lg-12 card-body">
+                <div class="card-header">
+                    <h3>Tambah Data Paket Salon</h3>
+                </div>
+                <form th:action="@{/addPaketSalon}" th:object="${paketSalonObject}" method="post">
+                    <div class="form-group">
+                        <label for="nama_paket">Nama Paket</label>
+                        <input class="form-control" type="text" name="nama_paket" id="nama_paket" th:field="*{nama_paket}">
+                        i<div class="validate-alert hide" style="color:red"> </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="deskripsi">Deskripsi</label>
+                        <input class="form-control" type="text" name="deskripsi" id="deskripsi" th:field="*{deskripsi}">
+                        <div class="validate-alert hide" style="color:red"> </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="harga">Harga</label>
+                        <input  id="harga" type="text" class="form-control" placeholder="Masukan Harga" data-mask="#.##0,00" data-mask-reverse="true" th:field="*{harga}">
+                        <div class="validate-alert hide" style="color:red"> </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit" id="btnSave">Simpan</button>
+                    <a class="btn btn-danger" href="listPaketSalon">Batal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- validasi java script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        function ValidateInput() {
+            const validate = [0, 0, 0];
+
+            if ($(nama_paket).val() === '') {
+                setErrorFor($(nama_paket), 'Nama paket harap di isi');
+            } else {
+                setClearFor($(nama_paket));
+                validate[0] = 1;
+            }
+
+            if ($(deskripsi).val() === '') {
+                setErrorFor($(deskripsi), 'Deskripsi harap di isi');
+            } else {
+                setClearFor($(deskripsi));
+                validate[1] = 1;
+            }
+
+            if ($(harga).val() === '') {
+                setErrorFor($(harga), 'Harga harap di isi');
+            } else if (!isDigit($(harga).val())) {
+                setErrorFor($(harga), 'Harga hanya berupa angka');
+            } else {
+                setClearFor($(harga));
+                validate[3] = 1;
+            }
+
+
+            if (validate[0] == 1 && validate[1] == 1 && validate[2] == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function setClearFor(input) {
+            var alert = $(input).parent().closest(".form-group").find('.validate-alert');
+            $(input).removeClass('input-invalid');
+            alert.addClass('hide');
+        }
+
+        function setErrorFor(input, message) {
+            var alert = $(input).parent().closest(".form-group").find('.validate-alert');
+            $(input).addClass('input-invalid');
+            alert.removeClass('hide');
+            alert.html(message);
+        }
+
+        function isChar(textbox) {
+            return /^[a-zA-Z]*$/g.test(textbox);
+        }
+
+        function isDigit(textBox) {
+            return /^[0-9]*$/g.test(textBox);
+        }
+
+        function Clear(element) {
+            if ($(element).hasClass("form-control input-invalid")) {
+                setClearFor(element);
+            }
+        }
+
+
+        $(document).ready(function () {
+            $('select').change(function () {
+                Clear(this);
+            });
+            $('input[type=text],input[type=number]').on('input', function () {
+                Clear(this);
+            });
+            $('textarea').on('input', function () {
+                Clear(this);
+            });
+            $('#potongan').on('input', function () {
+                Clear(this);
+            });
+        });
+        $('#btnSave').click(function (event) {
+            if (ValidateInput() == true) {
+                return true;
+            } else {
+
+                return false;
+            }
+        })
+    </script>
+
+</div>
+</html>

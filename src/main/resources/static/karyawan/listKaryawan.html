@@ -1,0 +1,64 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}">
+<div layout:fragment="content">
+
+    <div class="card card-form">
+
+        <div class="row no-gutters">
+            <div class="col-lg-12 card-body">
+                <div class="card-header">
+                    <h3>Daftar Karyawan</h3>
+                </div>
+                <a href="/viewaddKaryawan" class="btn btn-primary">+ Add New</a>
+                <div class="table-responsive border-bottom" data-toggle="lists" data-lists-values='["js-lists-values-employee-name"]'>
+
+                    <table class="table mb-0 thead-border-top-0">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Jabatan</th>
+
+                            <th>Username</th>
+                            <th>Status</th>
+
+
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody class="list" id="staff02">
+                        <tr th:each="karyawan, counter: ${listKaryawan}">
+                            <th th:text="${counter.count}"></th>
+                            <td th:text="${karyawan.id_karyawan}"></td>
+                            <td th:text="${karyawan.nama_karyawan}"></td>
+                            <td th:text="${karyawan.email}"></td>
+                            <td th:text="${karyawan.jabatan}"></td>
+                            <td th:text="${karyawan.username}"></td>
+                            <td>
+                                <div th:switch="${karyawan.status}">
+                                    <span th:case="1" class="tag tag-pill tag-success">Aktif</span>
+                                    <span th:case="0" class="tag tag-pill tag-danger">Non Aktif</span>
+                                </div>
+                            </td>
+                            <td>
+                                <a th:href="@{detailKaryawan/{id_karyawan}(id_karyawan=${karyawan.id_karyawan})}" class="btn btn-info">Detail</a>
+                                <a th:href="@{/viewupdateKaryawan/{id_karyawan}(id_karyawan=${karyawan.id_karyawan})}" class="btn btn-outline-primary">Edit</a>
+                                <a th:href="@{deleteKaryawan/{id_karyawan}(id_karyawan=${karyawan.id_karyawan})}" class="btn btn-danger" onclick="return confirm('Yakin ingin hapus ?')">Delete</a> </td>
+                            </td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</html>

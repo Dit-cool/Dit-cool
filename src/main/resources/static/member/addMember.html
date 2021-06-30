@@ -1,0 +1,157 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}">
+<div layout:fragment="content">
+
+    <div class="card card-form">
+        <div class="row no-gutters">
+
+            <div class="col-lg-12 card-body">
+                <div class="card-header">
+                    <h3>Tambah Data Member</h3>
+                </div>
+                <form th:action="@{/addMember}" th:object="${memberObject}" method="post">
+                    <div class="form-group">
+                        <label for="nama_member">Nama Member</label>
+                        <input type="text" class="form-control" name="nama_member" id="nama_member" th:field="*{nama_member}">
+                        <div class="validate-alert hide" style="color:red"> </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="no_ktp">No KTP</label>
+                        <input type="text" class="form-control" name="no_ktp" id="no_ktp" th:field="*{no_ktp}">
+                        <div class="validate-alert hide" style="color:red"> </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="alamat">Alamat</label>
+                        <textarea class="form-control" type="text" name="alamat" id="alamat" th:field="*{alamat}" rows="4" cols="50"></textarea>
+                        <div class="validate-alert hide" style="color:red"> </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="no_telp">No Telp</label>
+                        <input type="text" class="form-control" name="no_telp" id="no_telp" th:field="*{no_telp}">
+                        <div class="validate-alert hide" style="color:red"> </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" name="email" id="email" th:field="*{email}">
+                        <div class="validate-alert hide" style="color:red"> </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" name="username" id="username" th:field="*{username}">
+                        <div class="validate-alert hide" style="color:red"> </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="password" id="password" th:field="*{password}">
+                        <div class="validate-alert hide" style="color:red"> </div>
+                    </div>
+
+                    <button class="btn btn-primary" type="submit" id="btnSave">Simpan</button>
+                    <a class="btn btn-danger" href="/listMember">Batal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- validasi java script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        function ValidateInput() {
+            const validate = [0, 0, 0, 0];
+
+            if ($(id_merk).val() === '') {
+                setErrorFor($(id_merk), 'Merk harap di isi');
+            } else {
+                setClearFor($(id_merk));
+                validate[0] = 1;
+            }
+
+            if ($(id_tipe).val() === '') {
+                setErrorFor($(id_tipe), 'Tipe harap di isi');
+            } else {
+                setClearFor($(id_tipe));
+                validate[1] = 1;
+            }
+
+            if ($(tahun_pembuatan).val() === '') {
+                setErrorFor($(tahun_pembuatan), 'Tahun Pembuatan harap di isi');
+            } else {
+                setClearFor($(tahun_pembuatan));
+                validate[2] = 1;
+            }
+
+            if ($(harga).val() === '') {
+                setErrorFor($(harga), 'Harga harap di isi');
+            } else if (!isDigit($(harga).val())) {
+                setErrorFor($(harga), 'Harga hanya berupa angka');
+            } else {
+                setClearFor($(harga));
+                validate[3] = 1;
+            }
+
+
+            if (validate[0] == 1 && validate[1] == 1 && validate[2] == 1 && validate[3] == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function setClearFor(input) {
+            var alert = $(input).parent().closest(".form-group").find('.validate-alert');
+            $(input).removeClass('input-invalid');
+            alert.addClass('hide');
+        }
+
+        function setErrorFor(input, message) {
+            var alert = $(input).parent().closest(".form-group").find('.validate-alert');
+            $(input).addClass('input-invalid');
+            alert.removeClass('hide');
+            alert.html(message);
+        }
+
+        function isChar(textbox) {
+            return /^[a-zA-Z]*$/g.test(textbox);
+        }
+
+        function isDigit(textBox) {
+            return /^[0-9]*$/g.test(textBox);
+        }
+
+        function Clear(element) {
+            if ($(element).hasClass("form-control input-invalid")) {
+                setClearFor(element);
+            }
+        }
+
+
+        $(document).ready(function () {
+            $('select').change(function () {
+                Clear(this);
+            });
+            $('input[type=text],input[type=number]').on('input', function () {
+                Clear(this);
+            });
+            $('textarea').on('input', function () {
+                Clear(this);
+            });
+            $('#potongan').on('input', function () {
+                Clear(this);
+            });
+        });
+        $('#btnSave').click(function (event) {
+            if (ValidateInput() == true) {
+                return true;
+            } else {
+
+                return false;
+            }
+        })
+    </script>
+
+</div>
+</html>
