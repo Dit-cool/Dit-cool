@@ -1,0 +1,58 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}">
+
+<div layout:fragment="content">
+
+    <div class="card card-form">
+        <div class="row no-gutters">
+
+            <div class="col-lg-12 card-body">
+                <div class="card-header">
+                    <h3>Ubah Data Montir</h3>
+                </div>
+
+                <form th:action="@{/updateMontir/{id_montir}(id_montir=${montirObject.id_montir})}" th:object="${montirObject}" method="post">
+                    <div class="form-group">
+                        <input type="hidden" th:field="*{id_montir}">
+                    </div>
+<!--                    <div class="form-group">-->
+<!--                        <label for="nama_montir">Nama Montir</label>-->
+<!--                        <input class="form-control" type="text" name="nama_montir" id="nama_montir" th:field="*{nama_montir}">-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="tempat_lahir">Tempat Lahir</label>-->
+<!--                        <input class="form-control" type="text" name="tempat_lahir" id="tempat_lahir" th:field="*{tempat_lahir}">-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="tanggal_lahir">Tanggal Lahir</label>-->
+<!--                        <input class="form-control" type="date" name="tanggal_lahir" id="tanggal_lahir" th:field="*{tanggal_lahir}">-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <p>Jenis Kelamin</p>-->
+<!--                        <input type="radio" id="jenis_kelamin1" name="jenis_kelamin1" value="1" th:field="*{jenis_kelamin}">-->
+<!--                        <label for="jenis_kelamin1">Laki-laki</label><br>-->
+<!--                        <input type="radio" id="jenis_kelamin2" name="jenis_kelamin2" value="0" th:field="*{jenis_kelamin}">-->
+<!--                        <label for="jenis_kelamin2">Perempuan</label><br>-->
+<!--                    </div>-->
+                    <div class="form-group">
+                        <label for="alamat">Alamat</label>
+                        <textarea class="form-control" type="text" name="alamat" id="alamat" th:field="*{alamat}" rows="4" cols="50"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="no_telp">No Telp</label>
+                        <input class="form-control" type="text" name="no_telp" id="no_telp" th:field="*{no_telp}">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input class="form-control" type="text" name="email" id="email" th:field="*{email}">
+                    </div>
+                    <button class="btn btn-primary" onclick="return Validate()">Simpan</button>
+                    <a class="btn btn-danger" href="listMember">Batal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

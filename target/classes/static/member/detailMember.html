@@ -1,0 +1,75 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}">
+
+<div layout:fragment="content">
+
+  <div class="card card-form">
+    <div class="row no-gutters">
+
+      <div class="col-lg-12 card-body">
+        <div class="card-header">
+          <h3>Member</h3>
+        </div>
+
+        <div class="card-block" th:object="${memberObject}">
+          <div class="form-group">
+            <p><strong class="headings-color">ID Member</strong></p>
+            <input class="form-control form-control-rounded" type="text" name="id_member" id="id_member" th:field="*{id_member}" disabled>
+          </div>
+          <div class="form-group">
+            <p><strong class="headings-color">Nama Member</strong></p>
+            <input class="form-control form-control-rounded" type="text" name="nama_member" id="nama_member" th:field="*{nama_member}" disabled>
+          </div>
+
+          <div class="form-group">
+            <p><strong class="headings-color">No Telp</strong></p>
+            <input class="form-control form-control-rounded" type="text" name="no_telp" id="no_telp" th:field="*{no_telp}" disabled>
+          </div>
+          <div class="form-group">
+            <p><strong class="headings-color">Email</strong></p>
+            <input class="form-control form-control-rounded" type="text" name="email" id="email" th:field="*{email}" disabled>
+          </div>
+
+          <div class="form-group">
+            <p><strong class="headings-color">Poin</strong></p>
+            <input class="form-control form-control-rounded" type="text" name="poin" id="poin" th:field="*{poin}" disabled>
+          </div>
+
+          <div class="form-group">
+            <p><strong class="headings-color">No KTP</strong></p>
+            <input class="form-control form-control-rounded" type="text" name="no_ktp" id="no_ktp" th:field="*{no_ktp}" disabled>
+          </div>
+          <div class="form-group">
+            <p><strong class="headings-color">Alamat</strong></p>
+            <input class="form-control form-control-rounded" type="text" name="alamat" id="alamat" th:field="*{alamat}" disabled>
+          </div>
+
+          <div class="form-group">
+            <p><strong class="headings-color">Status</strong></p>
+            <input class="form-control form-control-rounded" type="text" name="status" id="status" th:field="*{status}"disabled>
+          </div>
+          <div class="form-group">
+            <p><strong class="headings-color">Created At</strong></p>
+            <input class="form-control form-control-rounded" type="text" name="creadate" id="creadate" th:field="*{creadate}"disabled>
+          </div>
+          <div class="form-group">
+            <p><strong class="headings-color">Created By</strong></p>
+            <input class="form-control form-control-rounded" type="text" name="creaby" id="creaby" th:field="*{creaby}"disabled>
+          </div>
+          <div class="form-group">
+            <p><strong class="headings-color">Modified At</strong></p>
+            <input class="form-control form-control-rounded" type="text" name="modidate" id="modidate" th:field="*{modidate}"disabled>
+          </div>
+          <div class="form-group">
+            <p><strong class="headings-color">Modified By</strong></p>
+            <input class="form-control form-control-rounded" type="text" name="modiby" id="modiby" th:field="*{modiby}" disabled>
+          </div>
+          <a class="btn btn-primary-dark" href="/listMember">Kembali</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</html>

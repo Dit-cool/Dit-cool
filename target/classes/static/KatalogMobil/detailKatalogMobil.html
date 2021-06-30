@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}">
+
+<div layout:fragment="content">
+
+<h1>DAFTAR Katalog Mobil</h1>
+<div class="card-block" th:object="${KatalogMobilObject}">
+    <div class="form-group">
+        <label>ID</label>
+        <p><b>#<span th:text="*{id_katalog}"></span></b></p>
+    </div>
+    <div class="form-group">
+        <label>Nama Merk</label>
+        <p th:text="*{id_merk}"></p>
+    </div>
+    <div class="form-group">
+        <label>Tipe</label>
+        <p th:text="*{id_tipe}"></p>
+    </div>
+    <div class="form-group">
+        <label>Tahun Pembuatan</label>
+        <p th:text="*{tahun_pembuatan}"></p>
+    </div>
+    <div class="form-group">
+        <label>Kapasitas Mesin</label>
+        <p th:text="*{kapasitas_mesin}"></p>
+    </div>
+    <div class="form-group">
+        <label>Transmisi</label>
+        <p th:text="*{transmisi_mesin}"></p>
+    </div>
+    <div class="form-group">
+        <label>Warna Mobil</label>
+        <p th:text="*{warna_mobil}"></p>
+    </div>
+    <div class="form-group">
+        <label>Harga</label>
+        <p th:text="*{harga}"></p>
+    </div>
+    <div class="form-group">
+        <label>Status</label>
+        <p th:text="*{status}"></p>
+    </div>
+    <div class="form-group">
+        <label>Created At</label>
+        <p th:text="*{creadate}"></p>
+    </div>
+    <div class="form-group">
+        <label>Created By</label>
+        <p th:text="*{creaby}"></p>
+    </div>
+    <div class="form-group">
+        <label>Modified At</label>
+        <p th:text="*{modidate}"></p>
+    </div>
+    <div class="form-group">
+        <label>Modified By</label>
+        <p th:text="*{modiby}"></p>
+    </div>
+
+    <div style="margin-top:50px;float:left">
+        <a href="/listKatalogMobil" class="btn btn-primary">Kembali</a>
+    </div>
+</div>
+
+</div>
+</html>

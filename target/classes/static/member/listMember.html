@@ -1,0 +1,73 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}">
+<div layout:fragment="content">
+
+
+
+
+    <div class="card card-form">
+
+        <div class="row no-gutters">
+            <div class="col-lg-12 card-body">
+                <div class="card-header">
+                    <h3>Daftar Member</h3>
+                </div>
+                <a href="/viewaddMember" class="btn btn-primary">+ Add New</a>
+                <div class="table-responsive border-bottom" data-toggle="lists" data-lists-values='["js-lists-values-employee-name"]'>
+
+                    <table class="table mb-0 thead-border-top-0">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+<!--                            <th>ID</th>-->
+                            <th>Name</th>
+                            <th>No KTP</th>
+                            <th>Alamat</th>
+                            <th>No Telp</th>
+                            <th>Email</th>
+                            <th>Poin</th>
+                            <th>Status</th>
+
+
+
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody class="list" id="staff02">
+                        <tr th:each="member, counter: ${listMember}">
+                            <th th:text="${counter.count}"></th>
+<!--                            <td th:text="${member.id_member}"></td>-->
+                            <td th:text="${member.nama_member}"></td>
+                            <td th:text="${member.no_ktp}"></td>
+                            <td th:text="${member.alamat}"></td>
+                            <td th:text="${member.no_telp}"></td>
+                            <td th:text="${member.email}"></td>
+                            <td th:text="${member.poin}"></td>
+                            <td>
+                                <div th:switch="${member.status}">
+                                    <span th:case="1" class="tag tag-pill tag-success">Aktif</span>
+                                    <span th:case="0" class="tag tag-pill tag-danger">Tidak Aktif</span>
+                                </div>
+                            </td>
+
+
+                            <td>
+                                <a th:href="@{detailMember/{id_member}(id_member=${member.id_member})}" class="btn btn-info">Detail</a>
+                                <a th:href="@{/viewupdateMember/{id_member}(id_member=${member.id_member})}" class="btn btn-outline-primary">Edit</a>
+                                <a th:href="@{deleteMember/{id_member}(id_member=${member.id_member})}" class="btn btn-danger" onclick="return confirm('Yakin ingin hapus ?')">Delete</a> </td>
+                            </td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</html>
